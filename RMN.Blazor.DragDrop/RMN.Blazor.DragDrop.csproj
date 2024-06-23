@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <Title>Blazor Drag and Drop</Title>
+    <Description>Simple drag and drop component for Blazor.</Description>
+    <Version>1.0.0</Version>
+    <Authors>aarm1n</Authors>
+    <PackageIcon>icon-blazor.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>blazor drag-drop sortable list</PackageTags>
+    <PackageProjectUrl>https://github.com/aarm1n/Blazor.DragDrop</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/aarm1n/Blazor.DragDrop</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon-blazor.png" Pack="True" PackagePath="\" />
+    <None Include="..\README.md" Pack="True" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" Condition="'$(TargetFramework)' == 'net5.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" Condition="'$(TargetFramework)' == 'net6.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" Condition="'$(TargetFramework)' == 'net7.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" Condition="'$(TargetFramework)' == 'net8.0'" />
+  </ItemGroup>
+
+</Project>

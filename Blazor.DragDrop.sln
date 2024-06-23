@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMN.Blazor.DragDrop", "RMN.Blazor.DragDrop\RMN.Blazor.DragDrop.csproj", "{F360E51E-CF93-4A9F-A17B-8BE203BAABF6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F360E51E-CF93-4A9F-A17B-8BE203BAABF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F360E51E-CF93-4A9F-A17B-8BE203BAABF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F360E51E-CF93-4A9F-A17B-8BE203BAABF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F360E51E-CF93-4A9F-A17B-8BE203BAABF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95FA2AA3-DBF5-4DF1-B488-E75A4232D174}
+	EndGlobalSection
+EndGlobal
