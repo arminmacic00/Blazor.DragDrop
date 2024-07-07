@@ -17,6 +17,9 @@ namespace RMN.Blazor.DragDrop
         public List<TItem> Items { get; set; } = new List<TItem>();
 
         [Parameter]
+        public string OrderPropertyName { get; set; } = string.Empty;
+
+        [Parameter]
         public string RootElement { get; set; } = "div";
 
         [Parameter]
@@ -26,10 +29,16 @@ namespace RMN.Blazor.DragDrop
         public string Class { get; set; } = string.Empty;
 
         [Parameter]
+        public string Style { get; set; } = string.Empty;
+
+        [Parameter]
         public string DragHandleClass { get; set; } = string.Empty;
 
         [Parameter]
         public string UndraggableItemClass { get; set; } = string.Empty;
+
+        [Parameter]
+        public bool AllowDragging { get; set; } = true;
 
         [Parameter]
         public bool AllowReorder { get; set; } = true;
@@ -59,6 +68,7 @@ namespace RMN.Blazor.DragDrop
                     Id,
                     DragHandleClass,
                     UndraggableItemClass,
+                    AllowDragging,
                     AllowReorder,
                     _selfReference
                 );
@@ -76,6 +86,9 @@ namespace RMN.Blazor.DragDrop
             if (!string.IsNullOrEmpty(Class))
                 builder.AddAttribute(sequence++, "class", Class);
 
+            if (!string.IsNullOrEmpty(Style))
+                builder.AddAttribute(sequence++, "style", Style);
+
             foreach (var item in Items)
                 builder.AddContent(sequence++, ItemTemplate!(item));
 
@@ -87,8 +100,16 @@ namespace RMN.Blazor.DragDrop
         {
             var itemToMove = Items[oldIndex];
 
-            Items.RemoveAt(oldIndex);
+            Items.Remove(itemToMove);
             Items.Insert(newIndex, itemToMove);
+
+            if (!string.IsNullOrEmpty(OrderPropertyName))
+            {
+                var orderProperty = typeof(TItem).GetProperty(OrderPropertyName);
+
+                if (orderProperty is not null)
+                    Items.ForEach(x => orderProperty.SetValue(x, Items.IndexOf(x)));
+            }
 
             StateHasChanged();
 

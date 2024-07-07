@@ -1,8 +1,9 @@
-export function init(id, dragHandleClass, undraggableItemClass, allowReorder, component) {
+export function init(id, dragHandleClass, undraggableItemClass, allowDragging, allowReorder, component) {
     Sortable.create(document.getElementById(id), {
         animation: 200,
         handle: dragHandleClass != '' ? `.${dragHandleClass}` : '',
         filter: undraggableItemClass != '' ? `.${undraggableItemClass}` : '',
+        disabled: !allowDragging,
         sort: allowReorder,
         forceFallback: true,
         chosenClass: 'dragging-item',
@@ -11,7 +12,7 @@ export function init(id, dragHandleClass, undraggableItemClass, allowReorder, co
             event.item.remove();
             event.to.insertBefore(event.item, event.to.childNodes[event.oldIndex]);
 
-            component.invokeMethodAsync('OnUpdateJS', event.oldDraggableIndex, event.newDraggableIndex);
+            component.invokeMethodAsync('OnUpdateJS', event.oldIndex, event.newIndex);
         }
     });
 }
