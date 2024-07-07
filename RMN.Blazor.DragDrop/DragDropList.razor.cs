@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RMN.Blazor.DragDrop
 {
-    public partial class DragDropList<TItem>
+    public partial class DragDropList<TItem> : IAsyncDisposable
     {
         [Inject]
         private IJSRuntime? JSRuntime { get; set; }
@@ -40,7 +40,9 @@ namespace RMN.Blazor.DragDrop
         [Parameter]
         public RenderFragment<TItem>? ItemTemplate { get; set; }
 
-        private DotNetObjectReference<DragDropList<TItem>>? selfReference;
+        private DotNetObjectReference<DragDropList<TItem>>? _selfReference;
+
+        private IJSObjectReference? _jsModuleReference;
 
 
 
@@ -48,17 +50,17 @@ namespace RMN.Blazor.DragDrop
         {
             if (firstRender)
             {
-                selfReference = DotNetObjectReference.Create(this);
+                _selfReference = DotNetObjectReference.Create(this);
 
-                var module = await JSRuntime!.InvokeAsync<IJSObjectReference>("import", "./_content/RMN.Blazor.DragDrop/DragDropList.razor.js");
+                _jsModuleReference = await JSRuntime!.InvokeAsync<IJSObjectReference>("import", "./_content/RMN.Blazor.DragDrop/DragDropList.razor.js");
 
-                await module.InvokeAsync<string>(
+                await _jsModuleReference.InvokeAsync<string>(
                     "init",
                     Id,
                     DragHandleClass,
                     UndraggableItemClass,
                     AllowReorder,
-                    selfReference
+                    _selfReference
                 );
             }
         }
@@ -91,6 +93,14 @@ namespace RMN.Blazor.DragDrop
             StateHasChanged();
 
             OnUpdate.InvokeAsync();
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (_jsModuleReference is not null)
+                await _jsModuleReference.DisposeAsync();
+
+            _selfReference?.Dispose();
         }
     }
 }
