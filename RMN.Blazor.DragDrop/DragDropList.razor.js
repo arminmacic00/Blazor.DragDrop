@@ -1,9 +1,9 @@
-export function init(id, handle, filter, sort, component) {
+export function init(id, dragHandleClass, undraggableItemClass, allowReorder, component) {
     Sortable.create(document.getElementById(id), {
         animation: 200,
-        handle: handle != '' ? `.${handle}` : '',
-        filter: filter != '' ? `.${filter}` : '',
-        sort: sort,
+        handle: dragHandleClass != '' ? `.${dragHandleClass}` : '',
+        filter: undraggableItemClass != '' ? `.${undraggableItemClass}` : '',
+        sort: allowReorder,
         forceFallback: true,
         chosenClass: 'dragging-item',
         ghostClass: 'dragging-ghost',

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RMN.Blazor.DragDrop
 {
-    public partial class DragDrop<T>
+    public partial class DragDropList<TItem>
     {
         [Inject]
         private IJSRuntime? JSRuntime { get; set; }
@@ -14,7 +14,7 @@ namespace RMN.Blazor.DragDrop
 
 
         [Parameter]
-        public List<T> Items { get; set; } = new List<T>();
+        public List<TItem> Items { get; set; } = new List<TItem>();
 
         [Parameter]
         public string RootElement { get; set; } = "div";
@@ -26,21 +26,21 @@ namespace RMN.Blazor.DragDrop
         public string Class { get; set; } = string.Empty;
 
         [Parameter]
-        public string Handle { get; set; } = string.Empty;
+        public string DragHandleClass { get; set; } = string.Empty;
 
         [Parameter]
-        public string Filter { get; set; } = string.Empty;
+        public string UndraggableItemClass { get; set; } = string.Empty;
 
         [Parameter]
-        public bool Sort { get; set; } = true;
+        public bool AllowReorder { get; set; } = true;
 
         [Parameter]
         public EventCallback OnUpdate { get; set; }
 
         [Parameter]
-        public RenderFragment<T>? DragDropItem { get; set; }
+        public RenderFragment<TItem>? ItemTemplate { get; set; }
 
-        private DotNetObjectReference<DragDrop<T>>? selfReference;
+        private DotNetObjectReference<DragDropList<TItem>>? selfReference;
 
 
 
@@ -50,14 +50,14 @@ namespace RMN.Blazor.DragDrop
             {
                 selfReference = DotNetObjectReference.Create(this);
 
-                var module = await JSRuntime!.InvokeAsync<IJSObjectReference>("import", "./_content/RMN.Blazor.DragDrop/DragDrop.razor.js");
+                var module = await JSRuntime!.InvokeAsync<IJSObjectReference>("import", "./_content/RMN.Blazor.DragDrop/DragDropList.razor.js");
 
                 await module.InvokeAsync<string>(
                     "init",
                     Id,
-                    Handle,
-                    Filter,
-                    Sort,
+                    DragHandleClass,
+                    UndraggableItemClass,
+                    AllowReorder,
                     selfReference
                 );
             }
@@ -75,7 +75,7 @@ namespace RMN.Blazor.DragDrop
                 builder.AddAttribute(sequence++, "class", Class);
 
             foreach (var item in Items)
-                builder.AddContent(sequence++, DragDropItem!(item));
+                builder.AddContent(sequence++, ItemTemplate!(item));
 
             builder.CloseElement();
         };

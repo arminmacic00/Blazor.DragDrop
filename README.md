@@ -34,9 +34,9 @@ This component provides simple and user-friendly drag and drop functionality for
 |RootElement         |String       |"div"  |Element that will serve as the parent.|
 |Id                  |String       |Guid   |Id for the parent element.|
 |Class               |String       |""     |CSS classes for the parent element.|
-|Handle              |String       |""     |CSS class for the drag handle.|
-|Filter              |String       |""     |CSS class for items that can't be dragged.|
-|Sort                |Boolean      |true   |Enables or disables reordering the list.|
+|DragHandleClass     |String       |""     |CSS class for the drag handle.|
+|UndraggableItemClass|String       |""     |CSS class for items that can't be dragged.|
+|AllowReorder        |Boolean      |true   |Enables or disables reordering the list.|
 |Context             |String       |context|Parameter name for the list items.|
 
 ### Events
@@ -46,32 +46,32 @@ This component provides simple and user-friendly drag and drop functionality for
 
 ### Basic example
 ```html
-<DragDrop Items="Items" Context="item">
+<DragDropList Items="Items" Context="item">
 
-    <DragDropItem>
+    <ItemTemplate>
         <p>@item.Name</p>
-    </DragDropItem>
+    </ItemTemplate>
 
-</DragDrop>
+</DragDropList>
 ```
 
 ### Advanced example
 ```html
-<DragDrop Items="Items"
-          RootElement="ul"
-          Handle="drag-handle"
-          Filter="undraggable-item"
-          Context="item"
-          OnUpdate="OnListUpdate">
+<DragDropList Items="Items"
+              RootElement="ul"
+              DragHandleClass="drag-handle"
+              UndraggableItemClass="undraggable-item"
+              Context="item"
+              OnUpdate="OnListUpdate">
 
-    <DragDropItem>
+    <ItemTemplate>
         <li>
             <i class="fa-solid fa-grip-vertical drag-handle @(item.Disabled ? "undraggable-item" : "")"></i>
             <span>@item.Name</span>
         </li>
-    </DragDropItem>
+    </ItemTemplate>
 
-</DragDrop>
+</DragDropList>
 ```
 
 ## Styling
