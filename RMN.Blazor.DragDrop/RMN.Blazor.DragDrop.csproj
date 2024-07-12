@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <Title>Blazor Drag and Drop</Title>
     <Description>Simple drag and drop component for Blazor.</Description>
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
     <Authors>aarm1n</Authors>
     <PackageIcon>icon-blazor.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -14,32 +14,14 @@
     <RepositoryUrl>https://github.com/aarm1n/Blazor.DragDrop</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>
-      Version 2.0.0
-
-      BREAKING CHANGES:
-      - Renamed "DragDrop" to "DragDropList".
-      - Renamed "DragDropItem" to "ItemTemplate".
-      - Renamed "Handle" to "DragHandleClass".
-      - Renamed "Filter" to "UndraggableItemClass".
-      - Renamed "Sort" to "AllowReorder".
-      - Renamed "T" to "TItem".
+      Version 2.1.0
 
       NEW FEATURES:
-      - Added parameter "OrderPropertyName":
-      You can now specify your item's order property name, and the property will automatically be updated after reordering the list.
-      - Added parameter "AllowDragging":
-      You can now enable or disable dragging of all items in the list.
-      - Added parameter "Style":
-      You can now add inline styles for the parent element.
-      - Disposed of object references:
-      Improved memory management by properly disposing of unused object references.
+      - "ItemTemplate" is no longer necessary:
+      You can now safely remove "ItemTemplate", and everything will still work as before.
 
       OTHER CHANGES:
-      - Minor corrections.
       - Updated documentation.
-
-      DEPRECATION NOTICE:
-      - Previous versions have been deprecated and unlisted. This version aligns with what was originally planned for 1.0.0.
     </PackageReleaseNotes>
   </PropertyGroup>
 

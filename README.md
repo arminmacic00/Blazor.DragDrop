@@ -9,6 +9,7 @@ This component provides simple and user-friendly drag and drop functionality for
 - Choose any HTML element to serve as the parent.
 - Use a drag handle to drag items only by the handle.
 - Fully customizable item template.
+- Animated movement of items.
 - Support for both desktop and mobile devices.
 - And more...
 
@@ -27,20 +28,20 @@ This component provides simple and user-friendly drag and drop functionality for
 
 ## API
 
-### Properties
-|Name                |Type             |Default|Description|
-|--------------------|-----------------|-------|-----------|
-|Items               |List&lt;TItem&gt;|[ ]    |List of items.|
-|OrderPropertyName   |String           |""     |Item's order property to update after reordering the list.|
-|RootElement         |String           |"div"  |Element that will serve as the parent.|
-|Id                  |String           |Guid   |Id for the parent element.|
-|Class               |String           |""     |CSS classes for the parent element.|
-|Style               |String           |""     |Inline styles for the parent element.|
-|DragHandleClass     |String           |""     |CSS class for the drag handle.|
-|UndraggableItemClass|String           |""     |CSS class for undraggable items.|
-|AllowDragging       |Boolean          |true   |Enables or disables dragging of all items.|
-|AllowReorder        |Boolean          |true   |Enables or disables reordering the list.|
-|Context             |String           |context|Parameter name for the list items.|
+### Parameters
+| Name                 | Type              | Default | Description |
+| -------------------- | ----------------- | ------- | ----------- |
+| Items                | List&lt;TItem&gt; | [ ]     | List of items. |
+| OrderPropertyName    | String            | ""      | Item's order property to update after reordering the list. |
+| RootElement          | String            | "div"   | Element that will serve as the parent. |
+| Id                   | String            | Guid    | Id for the parent element. |
+| Class                | String            | ""      | CSS classes for the parent element. |
+| Style                | String            | ""      | Inline styles for the parent element. |
+| DragHandleClass      | String            | ""      | CSS class for the drag handle. |
+| UndraggableItemClass | String            | ""      | CSS class for undraggable items. |
+| AllowDragging        | Boolean           | true    | Enables or disables dragging of all items. |
+| AllowReorder         | Boolean           | true    | Enables or disables reordering the list. |
+| Context              | String            | context | Parameter name for the list items. |
 
 ### Events
 `OnUpdate`: The method to be called after reordering the list.
@@ -51,9 +52,7 @@ This component provides simple and user-friendly drag and drop functionality for
 ```html
 <DragDropList Items="Items" Context="item">
 
-    <ItemTemplate>
-        <p>@item.Name</p>
-    </ItemTemplate>
+    <p>@item.Name</p>
 
 </DragDropList>
 ```
@@ -66,12 +65,10 @@ This component provides simple and user-friendly drag and drop functionality for
               Context="item"
               OnUpdate="OnListUpdate">
 
-    <ItemTemplate>
-        <li>
-            <i class="fa-solid fa-grip-vertical drag-handle"></i>
-            <span>@item.Name</span>
-        </li>
-    </ItemTemplate>
+    <li>
+        <i class="fa-solid fa-grip-vertical drag-handle"></i>
+        <span>@item.Name</span>
+    </li>
 
 </DragDropList>
 ```
@@ -85,11 +82,9 @@ This component provides simple and user-friendly drag and drop functionality for
               Context="item"
               OnUpdate="OnListUpdate">
 
-    <ItemTemplate>
-        <tr class="@(item.Disabled ? "undraggable-item" : null)">
-            <td>@item.Name</td>
-        </tr>
-    </ItemTemplate>
+    <tr class="@(item.Disabled ? "undraggable-item" : null)">
+        <td>@item.Name</td>
+    </tr>
 
 </DragDropList>
 ```

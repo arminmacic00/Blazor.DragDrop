@@ -47,6 +47,9 @@ namespace RMN.Blazor.DragDrop
         public EventCallback OnUpdate { get; set; }
 
         [Parameter]
+        public RenderFragment<TItem>? ChildContent { get; set; }
+
+        [Parameter]
         public RenderFragment<TItem>? ItemTemplate { get; set; }
 
         private DotNetObjectReference<DragDropList<TItem>>? _selfReference;
@@ -90,7 +93,7 @@ namespace RMN.Blazor.DragDrop
                 builder.AddAttribute(sequence++, "style", Style);
 
             foreach (var item in Items)
-                builder.AddContent(sequence++, ItemTemplate!(item));
+                builder.AddContent(sequence++, ChildContent is not null ? ChildContent(item) : ItemTemplate!(item));
 
             builder.CloseElement();
         };
