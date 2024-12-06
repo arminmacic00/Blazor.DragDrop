@@ -38,10 +38,10 @@ namespace RMN.Blazor.DragDrop
         public string UndraggableItemClass { get; set; } = string.Empty;
 
         [Parameter]
-        public bool AllowDragging { get; set; } = true;
+        public bool AllowReorder { get; set; } = true;
 
         [Parameter]
-        public bool AllowReorder { get; set; } = true;
+        public bool AllowDragging { get; set; } = true;
 
         [Parameter]
         public EventCallback OnUpdate { get; set; }
@@ -68,12 +68,15 @@ namespace RMN.Blazor.DragDrop
 
                 await _jsModuleReference.InvokeAsync<string>(
                     "init",
-                    Id,
-                    DragHandleClass,
-                    UndraggableItemClass,
-                    AllowDragging,
-                    AllowReorder,
-                    _selfReference
+                    new
+                    {
+                        Id,
+                        DragHandleClass,
+                        UndraggableItemClass,
+                        AllowReorder,
+                        AllowDragging,
+                        Component = _selfReference
+                    }
                 );
             }
         }

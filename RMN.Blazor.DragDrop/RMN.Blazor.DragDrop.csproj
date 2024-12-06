@@ -1,26 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFrameworks>net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net5.0;net6.0;net7.0;net8.0;net9.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <Title>Blazor Drag and Drop</Title>
-    <Description>Simple drag and drop component for Blazor.</Description>
-    <Version>2.1.0</Version>
-    <Authors>aarm1n</Authors>
+    <Description>Drag and drop list component for Blazor.</Description>
+    <Version>2.2.0</Version>
+    <Authors>Armin Macić</Authors>
     <PackageIcon>icon-blazor.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>blazor drag-drop sortable list</PackageTags>
-    <PackageProjectUrl>https://github.com/aarm1n/Blazor.DragDrop</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/aarm1n/Blazor.DragDrop</RepositoryUrl>
+    <PackageTags>blazor drag-drop reorder sortable list</PackageTags>
+    <RepositoryUrl>https://github.com/arminmacic00/Blazor.DragDrop</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) 2024 Armin Macić</Copyright>
     <PackageReleaseNotes>
-      Version 2.1.0
+      Version 2.2.0
 
       NEW FEATURES:
-      - "ItemTemplate" is no longer necessary:
-      You can now safely remove "ItemTemplate", and everything will still work as before.
+      - Added support for .NET 9.0:
+      Fully compatible with the latest .NET version.
+      - Switched to wildcard versions for package dependencies:
+      Always use the latest minor and patch versions.
 
       OTHER CHANGES:
+      - Minor corrections.
       - Updated documentation.
     </PackageReleaseNotes>
   </PropertyGroup>
@@ -31,10 +34,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" Condition="'$(TargetFramework)' == 'net5.0'" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" Condition="'$(TargetFramework)' == 'net6.0'" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" Condition="'$(TargetFramework)' == 'net7.0'" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" Condition="'$(TargetFramework)' == 'net8.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.*" Condition="'$(TargetFramework)' == 'net5.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.*" Condition="'$(TargetFramework)' == 'net6.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.*" Condition="'$(TargetFramework)' == 'net7.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.*" Condition="'$(TargetFramework)' == 'net8.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.*" Condition="'$(TargetFramework)' == 'net9.0'" />
   </ItemGroup>
 
 </Project>
